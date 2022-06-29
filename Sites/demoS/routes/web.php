@@ -41,4 +41,9 @@ Route::delete('/blogs/delete/{id}', [BlogController::class,'delete']);
 
 Route::get('tree',[treeController::class,'index']);
 
+Route::get('/send', '\App\Http\Controllers\HomeController@send')->name('home.send');
+
+Route::get('test_mail','App\Http\Controllers\HomeController@testMail');
+
+Route::get('send-mail', [HomeController::class, 'sendMail'])->middleware(['auth']);
 

@@ -18,8 +18,10 @@ class pppSeeder extends Seeder
         DB::table('ppp')->insert([
             'learn'=>Str::random(7),
             'wot'=>Str::random(7).'-WOT',
-            'created_at'=>Str::random(7),
-            'updated_at'=>Str::random(7)
+            'created_at'=>date("Y-m-d H:i:s"),
+            'updated_at'=>date("Y-m-d H:i:s"),
+            'votes'=>Str::random(1),
+            'difficulty'=>Str::random('easy')
         ]);
     }
 }
