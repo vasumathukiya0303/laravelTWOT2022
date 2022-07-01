@@ -31,9 +31,9 @@ return [
     ],
 
     'facebook' => [
-        'client_id' => '', //USE FROM FACEBOOK DEVELOPER ACCOUNT
-        'client_secret' => '', //USE FROM FACEBOOK DEVELOPER ACCOUNT
-        'redirect' => 'https://examplelaravel8.test/facebook/callback/'
+        'client_id' => env('FACEBOOK_CLIENT_ID'), //USE FROM FACEBOOK DEVELOPER ACCOUNT
+        'client_secret' => env('FACEBOOK_CLIENT_SECRET'), //USE FROM FACEBOOK DEVELOPER ACCOUNT
+        'redirect' => 'http://sanctumdemo/facebook/callback/'
     ],
 
     'google' => [
