@@ -25,23 +25,32 @@ Route::middleware(['auth'])->group(function () {
     Route::post('editprofiles/{id}',[CustomAuthController::class, 'editProfile'])->name('editprofiles');
     Route::post('editpassword',[UserController::class, 'updateEditPassword'])->name('editpassword');
     Route::delete('deleteprofile/{id}',[UserController::class, 'deleteProfile'])->name('deleteprofile');
+    Route::get('showprofile/{id}',[AdminController::class, 'showAdminProfile'])->name('showprofile');
 });
 
+//middleware auth and admin
 Route::middleware(['auth','is_admin'])->group(function (){
     Route::get('userslist',[AdminController::class, 'userList'])->name('userslist');
-    Route::get('showprofile/{id}',[AdminController::class, 'showAdminProfile'])->name('showprofile');
     Route::get('admindashboard/{id}',[AdminController::class, 'adminDashboard'])->name('admindashboard');
 });
 
 //Custom Controller
 Route::get('dashboard', [CustomAuthController::class, 'dashboard'])->name('dashboard');
+
+//Log in
 Route::get('login', [CustomAuthController::class, 'index'])->name('login');
 Route::post('custom-login', [CustomAuthController::class, 'customLogin'])->name('login.custom');
+
+//Registeration
 Route::get('registration', [CustomAuthController::class, 'registration'])->name('register-user');
 Route::post('custom-registration', [CustomAuthController::class, 'customRegistration'])->name('register.custom');
+
+//Admin add New User
+Route::get('newuser', [CustomAuthController::class, 'addNewUser'])->name('newuser');
+Route::post('newuseradd', [CustomAuthController::class, 'addNewUserRegister'])->name('newuseradd');
 Route::post('signout', [CustomAuthController::class, 'signOut'])->name('signout');
 
-//User Controller
+//Forgot password
 Route::get('forgot-passwords', [UserController::class, 'forgotPassword'])->name('forgot-password');
 Route::get('forgot-password/{token}', [UserController::class, 'forgotPasswordValidate']);
 Route::post('forgot-passwords', [UserController::class, 'resetPassword'])->name('forgot-password');

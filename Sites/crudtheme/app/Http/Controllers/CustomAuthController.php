@@ -57,7 +57,26 @@ class CustomAuthController extends Controller
         $data = $request->all();
         $userdata = $this->create($data);
         Auth::loginUsingId($userdata->id);
-        return view("auth.dashboard")->withSuccess('You have signed-in');
+        $showDisplayData = auth()->user()->id;
+            return view("auth.dashboard",compact('showDisplayData'))->withSuccess('You have signed-in');
+    }
+
+    public function addNewUserRegister(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6',
+            'phone' => 'required|min:10',
+            'city' => 'required|min:3',
+        ]);
+        $data = $request->all();
+        $userdata = $this->create($data);
+        Auth::loginUsingId($userdata->id);
+        session()->flash(
+            'feedback', 'Your User was successfully Added.'
+        );
+        return redirect()->route('userslist');
     }
 
 
@@ -77,7 +96,6 @@ class CustomAuthController extends Controller
     public function dashboard()
     {
         $showDisplayData = auth()->user()->id;
-//        dd($showDisplayData);
         if (Auth::check()) {
             return view('auth.dashboard',compact('showDisplayData'));
         }
@@ -106,8 +124,6 @@ class CustomAuthController extends Controller
 
     public function editProfile(Request $request,$id)
     {
-//        dd($request->id);
-//         dd($request->all(),$id);
         $contact_id = User::find($id);
         $request->validate([
             'id' => 'required',
@@ -128,11 +144,13 @@ class CustomAuthController extends Controller
                 'feedback', 'Your profile was successfully updated.'
             );
             if (auth()->user()->is_admin == 1){
-                return redirect()->route('admindashboard',$id);
+                return redirect()->route('userslist');
             }else{
                 return redirect()->route('dashboard');
             }
-//            return redirect()->route('dashboard');
         }
+    }
+    public function addNewUser(){
+        return view('auth.add_new_user');
     }
 }

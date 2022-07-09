@@ -15,7 +15,6 @@ class AdminController extends Controller
 
     }
     public function showAdminProfile($id){
-
         $showData = auth()->user()->id;
         $contactData = User::find($id);
         return view('auth.showprofile',compact('showData','contactData'));

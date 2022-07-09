@@ -48,12 +48,13 @@
                     Profile
                 </button>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{{route('showprofile',$showDisplayData)}}">User Profile Details</a>
-                    <a class="dropdown-item" href="{{route('editprofile',$showDisplayData)}}">Edit Profile</a>
-                    <a class="dropdown-item" href="#">Setting</a>
                     @if(auth()->user()->is_admin == 1)
                         <a class="dropdown-item" href="{{route('showprofile',$showDisplayData)}}">Admin Profile Details</a>
                         <a class="dropdown-item" href="{{route('userslist')}}">User's List</a>
+                        <a class="dropdown-item" href="#">Setting</a>
+                    @else
+                        <a class="dropdown-item" href="{{route('showprofile',$showDisplayData)}}">User Profile Details</a>
+                        <a class="dropdown-item" href="{{route('editprofile',$showDisplayData)}}">Edit Profile</a>
                         <a class="dropdown-item" href="#">Setting</a>
                     @endif
                 </div>

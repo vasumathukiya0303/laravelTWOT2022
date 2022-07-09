@@ -130,7 +130,7 @@ class UserController extends Controller
     public function deleteProfile($id){
 //        User::destroy($id);
         User::find($id)->delete();
-        return redirect()->route('admindashboard')->with('success', 'User Sucessfully deleted...');
+        return redirect()->route('admindashboard',compact('id'))->with('success', 'User Sucessfully deleted...');
     }
 
 }

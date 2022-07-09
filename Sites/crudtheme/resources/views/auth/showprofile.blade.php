@@ -40,11 +40,17 @@
     </div>
     <div>
         @if(auth()->user()->is_admin == 1)
+            @if(auth()->user()->id == $showData && auth()->user()->is_admin == 1)
             <a class="btn btn-primary float-end" href="{{route('admindashboard',$showData)}}">
                 <i class="bi bi-arrow-left-circle" style='font-size:11px;'></i> Back to Dashboard
             </a>
+            @else
+            <a class="btn btn-primary float-end" href="{{route('userslist')}}">
+                <i class="bi bi-arrow-left-circle" style='font-size:11px;'></i> Back to User's List
+            </a>
+            @endif
         @else
-            <a class="btn btn-primary float-end" href="{{route('dashboard',$showDisplayData)}}">
+            <a class="btn btn-primary float-end" href="{{route('dashboard')}}">
                 <i class="bi bi-arrow-left-circle" style='font-size:11px;'></i> Back to Dashboard
             </a>
         @endif
