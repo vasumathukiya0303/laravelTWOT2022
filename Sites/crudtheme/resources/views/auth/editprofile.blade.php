@@ -22,6 +22,14 @@
 <body>
 <div class="offset-3 col-md-6 offset-3 pt-5">
     <div class="card">
+        <div class="mt-1 mx-2">
+            @if(auth()->user()->is_admin == 1)
+        {{ Breadcrumbs::render('editprofile') }}
+            @endif
+                @if(auth()->user()->is_admin == 0)
+                    {{ Breadcrumbs::render('editprofileuser') }}
+                @endif
+        </div>
         <div class="card-header">
             <h4 class="card-title">Edit User Details :~ </h4>
         </div>

@@ -20,12 +20,28 @@
     <script src="{{asset('/assets/js/mazer.js')}}"></script>
 </head>
 <body>
-<div class="row" id="table-striped">
-    <div class="col-12">
+<div class="container">
+<div class="row p-5" id="table-striped">
+    <div class="col-12 p-0">
         <div class="card">
-            <div class="row card-header">
-                <div class="col-6"><h3 class="card-title bold">User's List</h3></div>
-                <div class="col-6 ">
+            <div class="row m-0 card-header">
+                <div class="col-3"><h3 class="card-title bold">User's List</h3></div>
+                <div class="search-container col-6">
+                    <ul class="pagination justify-content-center">
+                        <form action="{{ route('search') }}" method="post" role="search">
+                            @csrf
+                            <div class="row">
+                                <div class="col-9 p-0"> <input type="text" placeholder="Search.." name="search" class="form-control"></div>
+                                <div class="col-3 p-0"><button type="submit" class="btn btn-primary">
+                                        <i class="bi bi-search"></i>
+                                    </button></div>
+
+
+                            </div>
+                        </form>
+                    </ul>
+                </div>
+                <div class="col-3 ">
                     <a class="btn btn-primary float-end mx-4" href="{{route('newuser')}}">
                         <i class="bi bi-person-plus-fill" style='font-size:16px;'></i> Add New User
                     </a>
@@ -45,24 +61,27 @@
                     </div>
                 @endif
             </div>
+            <div class="mx-2">
+            {{ Breadcrumbs::render('userslist') }}
+            </div>
             <div class="card-content">
                 <!-- table striped -->
                 <div class="table-responsive">
-                    <table class="table mb-0 table-bordered">
+                    <table class="table table-bordered">
                         <thead>
                         <tr class="table-primary">
-                            <th>ID</th>
-                            <th>NAME</th>
-                            <th>EMAIL</th>
-                            <th>PHONE</th>
-                            <th>CITY</th>
+                            <th>@sortablelink('id')</th>
+                            <th>@sortablelink('name')</th>
+                            <th>@sortablelink('email')</th>
+                            <th>@sortablelink('phone')</th>
+                            <th>@sortablelink('city')</th>
                             <th>ACTION</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($userslist as $user)
                             <tr class="table-primary">
-                                <td>{{$user->id}}</td>
+                                <td>{{$loop->index+1}}</td>
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->phone}}</td>
@@ -91,10 +110,16 @@
                         @endforeach
                         </tbody>
                     </table>
-                    <div class="pt-3 mx-5 pb-3">
-                        <a class="btn btn-primary float-end" href="{{route('admindashboard',$user->id)}}">
+                    <div class="row pt-3" style="margin:0;">
+                        <div class="offset-1 col-5">
+                        {{ $userslist->links() }}
+                        </div>
+                        <div class="col-5 offset-1 mx-2">
+                        <a class="btn btn-primary float-end"
+                           href="{{route('admindashboard',$user->id)}}">
                             <i class="bi bi-arrow-left-circle" style='font-size:11px;'></i> Back
                         </a>
+                        </div>
                     </div>
                 </div>
             </div>

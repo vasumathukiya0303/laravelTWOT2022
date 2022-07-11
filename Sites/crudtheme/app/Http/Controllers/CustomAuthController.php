@@ -7,6 +7,8 @@ use Hash;
 use Session;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\DB;
 
 class CustomAuthController extends Controller
 {
@@ -152,5 +154,18 @@ class CustomAuthController extends Controller
     }
     public function addNewUser(){
         return view('auth.add_new_user');
+    }
+
+    public function searchUser(Request $request){
+
+        $search = $request->search;
+        if($search != ''){
+            $userslist = User::where('name','like', '%' .$search. '%')->sortable()->paginate(5);
+            $userslist->items();
+            if(count($userslist)>0){
+                return view('auth.admin_users_list',compact('userslist'));
+            }
+            return back()->with('error','No results Found');
+        }
     }
 }

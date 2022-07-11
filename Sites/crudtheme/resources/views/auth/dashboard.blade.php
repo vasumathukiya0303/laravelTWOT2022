@@ -61,9 +61,9 @@
             </div>
         </div>
     </nav>
-    <div class="pt-3 pb-1">
-
-    </div>
+        <div class="pt-2 ">
+            {{ Breadcrumbs::render('dashboard') }}
+        </div>
     <div class="jumbotron">
         <h5>Welcome, {{ auth()->user()->email }}</h5>
         @if(session('feedback'))

@@ -41,7 +41,9 @@
                     <i class="bi bi-person-circle" style="font-size:40px"></i>
                 </div>
             </a>
-            <div></div>
+            <div class="pt-2 ">
+                {{ Breadcrumbs::render('admindashboard') }}
+            </div>
             <div class="dropdown float-end mt-2">
                 <button type="button" class="btn btn-primary dropdown-toggle"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -56,10 +58,10 @@
         </div>
     </nav>
     <div class="pt-3 pb-1">
-
     </div>
     <div class="jumbotron">
-        <h5>Welcome, {{ auth()->user()->email }}</h5>
+        <h3>Welcome, {{ auth()->user()->email }}</h3>
+        <h1 class="display-3">Mazer Theme</h1>
         @if(session('feedback'))
             <div class="alert alert-success alert-dismissible show fade">
                 {{session('feedback')}}
@@ -78,6 +80,16 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
+        <h2>Features:</h2>
+        <ul>
+            <li>User Details Show</li>
+            <li>User Details Edit</li>
+            <li>User Delete</li>
+            <li>Add User</li>
+            <li>Admin Details Show</li>
+            <li>BreadCrumbs</li>
+            <li>Pagination with search in userlist</li>
+        </ul>
     </div>
 </div>
 </body>

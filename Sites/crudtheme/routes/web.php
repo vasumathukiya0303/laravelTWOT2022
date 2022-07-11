@@ -21,8 +21,8 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('editprofile/{id}',[CustomAuthController::class, 'edit'])->name('editprofile');
-    Route::post('editprofiles/{id}',[CustomAuthController::class, 'editProfile'])->name('editprofiles');
+    Route::get('editprofile/{id?}',[CustomAuthController::class, 'edit'])->name('editprofile');
+    Route::post('editprofiles/{id?}',[CustomAuthController::class, 'editProfile'])->name('editprofiles');
     Route::post('editpassword',[UserController::class, 'updateEditPassword'])->name('editpassword');
     Route::delete('deleteprofile/{id}',[UserController::class, 'deleteProfile'])->name('deleteprofile');
     Route::get('showprofile/{id}',[AdminController::class, 'showAdminProfile'])->name('showprofile');
@@ -31,7 +31,8 @@ Route::middleware(['auth'])->group(function () {
 //middleware auth and admin
 Route::middleware(['auth','is_admin'])->group(function (){
     Route::get('userslist',[AdminController::class, 'userList'])->name('userslist');
-    Route::get('admindashboard/{id}',[AdminController::class, 'adminDashboard'])->name('admindashboard');
+    Route::get('admindashboard/{id?}',[AdminController::class, 'adminDashboard'])->name('admindashboard');
+    Route::post('search',[CustomAuthController::class, 'searchUser'])->name('search');
 });
 
 //Custom Controller

@@ -10,7 +10,7 @@ class AdminController extends Controller
 {
     public function userList(Request $request){
 //        dd($request->all());
-        $userslist = User::all();
+        $userslist = User::sortable()->paginate(5);
         return view('auth.admin_users_list', compact('userslist'));
 
     }
